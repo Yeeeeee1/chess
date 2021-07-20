@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: rgb(231, 216, 228);
 }
 /* -------------- room.ejs -------------- */
 
@@ -35,6 +34,7 @@ button {
 }
 
 .window {
+  background-color: rgb(231, 216, 228);
   position: absolute;
   z-index: 1000;
   bottom: 0;
@@ -193,4 +193,10 @@ button {
   padding: 20px;
   border: 2px solid;
   border-radius: 10px;
+}
+
+#status {
+  right: 47%;
+  position: absolute;
+  text-align: center;
 }

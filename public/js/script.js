@@ -19,8 +19,6 @@ var onDragStart = function (source, piece, position, orientation) {
 };
 
 var onDrop = function (source, target) {
-  document.getElementById("flipLink").click();
-  console.log(2);
   var move = game.move({
     from: source,
     to: target,
@@ -103,34 +101,33 @@ var updateStatus = function () {
   //���������� �������
   var status = "";
   specialCase = false;
-  var moveColor = "�����";
-  if (game.turn() === game.BLACK) moveColor = "׸����";
+  var moveColor = "Белые";
+  if (game.turn() === game.BLACK) moveColor = "Чёрные";
   if (game.in_checkmate() === true) {
     //���
-    status = "" + moveColor + " �������� ���";
+    status = "" + moveColor + " Ходят";
   } else if (game.in_draw() === true) {
     //�����
-    if (game.in_stalemate() === true) status = "����� (���)";
+    if (game.in_stalemate() === true) status = "Ничья(Пат)";
     else if (game.in_threefold_repetition() === true) {
       specialCase = true;
-      status =
-        moveColor + " ����� ������ (�����, ���������� ���������� �������)";
+      status = moveColor + " Ходят";
     } else if (game.insufficient_material() === true) {
       specialCase = true;
-      status = moveColor + " ����� ������ (�����, ������������ ���������)";
+      status = moveColor + " Ходят";
     } else {
       specialCase = true;
-      status = moveColor + " ����� ������ (�����, ������� 50 �����)";
+      status = moveColor + " Ходят";
     }
     if (game.in_check() === true) {
       //���
-      status += ", " + moveColor.toLowerCase() + " ��� �����";
+      status += ", " + moveColor.toLowerCase() + "Ходят";
     }
   } else {
-    status = moveColor + " ����� ������";
+    status = moveColor + " Ходят";
     if (game.in_check() === true) {
       //���
-      status += ", " + moveColor.toLowerCase() + " ��� �����";
+      status += ", " + moveColor.toLowerCase() + " Ходят";
     }
   }
   statusEl.html(status);
@@ -374,3 +371,22 @@ function promo() {
   pbs();
   updateStatus();
 }
+
+function listenCookieChange(callback, interval = 1000) {
+  let lastCookie = document.cookie;
+  setInterval(() => {
+    let cookie = document.cookie;
+    if (cookie !== lastCookie) {
+      try {
+        callback({ oldValue: lastCookie, newValue: cookie });
+      } finally {
+        lastCookie = cookie;
+      }
+    }
+  }, interval);
+}
+
+listenCookieChange(({ oldValue, newValue }) => {
+  console.log(`Cookie changed from "${oldValue}" to "${newValue}"`);
+  updateStatus();
+}, 1000);

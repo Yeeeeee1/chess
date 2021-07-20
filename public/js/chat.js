@@ -63,8 +63,10 @@ socket.on("typing", (user) => {
 
 //Displaying online users
 socket.on("online-users", (data) => {
-  if (data.length >= 2) {
+  if (data.length > 2) {
     alert("Max people is 2!");
+    location.href = "/";
+    return;
   }
   users.innerHTML = "";
   data.forEach((user) => {

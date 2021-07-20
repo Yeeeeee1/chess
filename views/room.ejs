@@ -9,6 +9,7 @@
   </head>
   <body>
     <h1 class="room-message"></h1>
+    <span id="status"></span>
     <div class="window">
       <div class="chat-message">
         <div id="output"></div>
@@ -33,65 +34,35 @@
           id="instructionLink"
           style="cursor: pointer; text-decoration: underline"
           onclick="switchShow();"
-          >����������</span
+        ></span
         >&nbsp;&nbsp;
         <span
           id="reloadLink"
           style="cursor: pointer; text-decoration: underline"
           onclick="reloadMe();"
-          >������</span
+          >Reload</span
         >&nbsp;&nbsp;
         <span
           id="undoLink"
           style="cursor: pointer; text-decoration: underline"
           onclick="undoMe();"
-          >�������� ���</span
+        ></span
         >&nbsp;&nbsp;
         <span
           id="flipLink"
           style="cursor: pointer; text-decoration: underline"
           onclick="flipMe();"
-          >���������� �����</span
+        ></span
         >&nbsp;&nbsp;
         <span
           id="putFENLink"
           style="cursor: pointer; text-decoration: underline"
           onclick="putFENMe();"
-          >������ FEN</span
-        >
+        ></span>
       </p>
     </div>
-    <div class="info" id="instructionBox" style="display: none">
-      <p>
-        ������ �� �������� ������ � ��������� ������� ��� � �������, �����������
-        �� ������ "������ FEN" (<a
-          href="https://ru.wikipedia.org/wiki/%D0%9D%D0%BE%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D0%A4%D0%BE%D1%80%D1%81%D0%B0%D0%B9%D1%82%D0%B0_%E2%80%94_%D0%AD%D0%B4%D0%B2%D0%B0%D1%80%D0%B4%D1%81%D0%B0"
-          target="_blank"
-          >��� ����� FEN</a
-        >?). <br />������� ���� ����������� �������������. ����� ��������
-        ��������� ���� ������������� ������ �� ��������� ��� �����������
-        �������. ��� ������������ �������� � �������� � ��������� �������
-        ������� "������". <br />����� �������� ����� ������ � ������� PGN,
-        ����������� ��� ������, �������� �� ���� ���� ��� (<a
-          href="https://ru.wikipedia.org/wiki/Portable_Game_Notation"
-          target="_blank"
-          >��� ����� PGN</a
-        >?). ����� ����� ����� ������ Ctrl+C ��� ����������� ������ ������ �
-        ����� ������.
-      </p>
-    </div>
+
     <div id="board" class="board"></div>
-    <div class="info">
-      <p><b>���������</b>: <span id="status"></span></p>
-      <p>
-        <b>FEN �������</b>:
-        <span id="fen" onclick="selectElement('fen');"></span>
-      </p>
-      <p>
-        <b>PGN ������</b>:
-        <span id="pgn" onclick="selectElement('pgn');"></span>
-      </p>
-    </div>
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/chess.js"></script>
     <script src="js/chessboard.js"></script>
