@@ -1,29 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat APP</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <h1 class="room-message"></h1>
     <div class="window">
-        <div class="chat-message">
-            <div id="output"></div>
-            <div id="feedback"></div>
-        </div>
-        <div class='fields'>
-            <input type="text" id="message" placeholder="Enter message">
-            <button id="send">Send</button>
-        </div>
+      <div class="chat-message">
+        <div id="output"></div>
+        <div id="feedback"></div>
+      </div>
+      <div class="fields">
+        <input type="text" id="message" placeholder="Enter message" />
+        <button id="send">Send</button>
+      </div>
     </div>
     <div class="online">
-        <p class="users-online">Users Online</p>
-        <div class="users">
-        </div>
+      <p class="users-online">Users Online</p>
+      <div class="users"></div>
     </div>
-    <script src="/chat.js"></script>
-</body>
+    <div class="online">
+      <p class="users-online">Users Online</p>
+      <div class="users"></div>
+    </div>
+    <div class="info">
+      <p>
+        <span
+          id="instructionLink"
+          style="cursor: pointer; text-decoration: underline"
+          onclick="switchShow();"
+          >����������</span
+        >&nbsp;&nbsp;
+        <span
+          id="reloadLink"
+          style="cursor: pointer; text-decoration: underline"
+          onclick="reloadMe();"
+          >������</span
+        >&nbsp;&nbsp;
+        <span
+          id="undoLink"
+          style="cursor: pointer; text-decoration: underline"
+          onclick="undoMe();"
+          >�������� ���</span
+        >&nbsp;&nbsp;
+        <span
+          id="flipLink"
+          style="cursor: pointer; text-decoration: underline"
+          onclick="flipMe();"
+          >���������� �����</span
+        >&nbsp;&nbsp;
+        <span
+          id="putFENLink"
+          style="cursor: pointer; text-decoration: underline"
+          onclick="putFENMe();"
+          >������ FEN</span
+        >
+      </p>
+    </div>
+    <div class="info" id="instructionBox" style="display: none">
+      <p>
+        ������ �� �������� ������ � ��������� ������� ��� � �������, �����������
+        �� ������ "������ FEN" (<a
+          href="https://ru.wikipedia.org/wiki/%D0%9D%D0%BE%D1%82%D0%B0%D1%86%D0%B8%D1%8F_%D0%A4%D0%BE%D1%80%D1%81%D0%B0%D0%B9%D1%82%D0%B0_%E2%80%94_%D0%AD%D0%B4%D0%B2%D0%B0%D1%80%D0%B4%D1%81%D0%B0"
+          target="_blank"
+          >��� ����� FEN</a
+        >?). <br />������� ���� ����������� �������������. ����� ��������
+        ��������� ���� ������������� ������ �� ��������� ��� �����������
+        �������. ��� ������������ �������� � �������� � ��������� �������
+        ������� "������". <br />����� �������� ����� ������ � ������� PGN,
+        ����������� ��� ������, �������� �� ���� ���� ��� (<a
+          href="https://ru.wikipedia.org/wiki/Portable_Game_Notation"
+          target="_blank"
+          >��� ����� PGN</a
+        >?). ����� ����� ����� ������ Ctrl+C ��� ����������� ������ ������ �
+        ����� ������.
+      </p>
+    </div>
+    <div id="board" class="board"></div>
+    <div class="info">
+      <p><b>���������</b>: <span id="status"></span></p>
+      <p>
+        <b>FEN �������</b>:
+        <span id="fen" onclick="selectElement('fen');"></span>
+      </p>
+      <p>
+        <b>PGN ������</b>:
+        <span id="pgn" onclick="selectElement('pgn');"></span>
+      </p>
+    </div>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/chess.js"></script>
+    <script src="js/chessboard.js"></script>
+    <script src="js/script.js"></script>
+    <noscript>
+      <div align="center">
+        ��������, ��� ������ ���������� ����� ���������� Javascript � ��������
+      </div>
+    </noscript>
+
+    <!-- ��������� ����������� ������ -->
+    <div id="coronar" hidden="true">
+      <div>
+        <label for="color">�����������</label>
+        <div>
+          <select onChange="promo()" id="promote">
+            <option value="0" selected>�� �������</option>
+            <option value="q">�����</option>
+            <option value="r">�����</option>
+            <option value="b">����</option>
+            <option value="n">����</option>
+          </select>
+        </div>
+        <br />
+        <table width="248" border="1" cellpadding="4" cellspacing="0">
+          <tbody>
+            <tr id="promo_blancas">
+              <td
+                align="center"
+                valign="middle"
+                width="56"
+                height="53"
+                onClick="reina()"
+              >
+                <img src="img/wQ.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="53" onClick="torre()">
+                <img src="img/wR.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="58" onClick="alfil()">
+                <img src="img/wB.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="53" onClick="caballo()">
+                <img src="img/wN.png" width="50" height="50" alt="" />
+              </td>
+            </tr>
+            <tr id="promo_negras">
+              <td
+                align="center"
+                valign="middle"
+                width="56"
+                height="53"
+                onClick="reina()"
+              >
+                <img src="img/bQ.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="53" onClick="torre()">
+                <img src="img/bR.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="58" onClick="alfil()">
+                <img src="img/bB.png" width="50" height="50" alt="" />
+              </td>
+              <td align="center" valign="middle" width="53" onClick="caballo()">
+                <img src="img/bN.png" width="50" height="50" alt="" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">�����</td>
+              <td align="center" valign="middle">�����</td>
+              <td align="center" valign="middle">����</td>
+              <td align="center" valign="middle">����</td>
+            </tr>
+          </tbody>
+        </table>
+        <br />
+      </div>
+    </div>
+    <script src="./js/chat.js"></script>
+  </body>
 </html>

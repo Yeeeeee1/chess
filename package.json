@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "Himanshu Agarwal",
+  "author": "Konstantin Kravtsov",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",

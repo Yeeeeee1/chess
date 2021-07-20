@@ -1,121 +1,196 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(231, 216, 228);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: rgb(231, 216, 228);
 }
 /* -------------- room.ejs -------------- */
 
 h1 {
-    text-align: center;
-    margin-top: 15px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 input {
-    width: 100%;
-    height: 40px;
-    text-indent: 10px;
+  width: 100%;
+  height: 40px;
+  text-indent: 10px;
 }
 
 button {
-    width: 100%;
-    height: 50px;
-    background-color: #1a2eda;
-    color: white;
-    font-size: larger;
-    font-weight: bold;
-    outline: none;
-    cursor: pointer;
-    border: none;
+  width: 100%;
+  height: 50px;
+  background-color: #1a2eda;
+  color: white;
+  font-size: larger;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border: none;
 }
 
 .fields {
-    width: 100%;
+  width: 100%;
 }
 
 .window {
-    margin: auto;
-    margin-top: 20px;
-    width: 700px;
-    height: 500px;
-    border: 2px solid #c2c6b6;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+  float: right;
+  margin-top: 20px;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #c2c6b6;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 
 .chat-message {
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
 
-#output, #feedback {
-    margin-left: 10px;
+#output,
+#feedback {
+  margin-left: 10px;
 }
 
 .online {
-    height: 100vh;
-    width: 300px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    background-color: rgb(110, 103, 103);
+  height: 100vh;
+  width: 300px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: rgb(110, 103, 103);
 }
 
 .online .users-online {
-    background-color: rgb(110, 103, 103);
-    color: white;
-    text-align: center;
-    font-size: 40px;
-    font-weight: bolder;
+  background-color: rgb(110, 103, 103);
+  color: white;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bolder;
 }
 
 .users {
-    margin-left: 40px;
-    margin-top: 50px;
+  margin-left: 40px;
+  margin-top: 50px;
 }
 
 .users p {
-    background-color: rgb(110, 103, 103);
-    color: white;
+  background-color: rgb(110, 103, 103);
+  color: white;
 }
 
 /* -------------- index.ejs -------------- */
 
 .content {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .content p {
-    font-size: 40px;
-    font-weight: 700;
-    margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 40px;
 }
 
 .content input {
-    margin-bottom: 20px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 7px;
+  margin-bottom: 20px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 7px;
 }
 
 .content input[type="submit"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 ::placeholder {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .content div {
-    border: 2px solid black;
-    padding: 70px;
-    border-radius: 25px;
+  border: 2px solid black;
+  padding: 70px;
+  border-radius: 25px;
+}
+
+.board {
+  width: 640px;
+  margin: auto;
+}
+.info {
+  width: 640px;
+  margin: auto;
+}
+.fen {
+  width: 640px;
+  margin: auto;
+}
+.clearfix-7da63 {
+  clear: both;
+}
+.board-b72b1 {
+  border: 2px solid #404040;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.square-55d63 {
+  float: left;
+  position: relative;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.white-1e1d7 {
+  background-color: #f0d9b5;
+  color: #b58863;
+}
+.black-3c85d {
+  background-color: #b58863;
+  color: #f0d9b5;
+}
+.highlight1-32417,
+.highlight2-9c5d2 {
+  -webkit-box-shadow: inset 0 0 3px 3px yellow;
+  -moz-box-shadow: inset 0 0 3px 3px yellow;
+  box-shadow: inset 0 0 3px 3px yellow;
+}
+.notation-322f9 {
+  cursor: default;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  position: absolute;
+}
+.alpha-d2270 {
+  bottom: 1px;
+  right: 3px;
+}
+.numeric-fc462 {
+  top: 2px;
+  left: 2px;
+}
+#coronar {
+  top: 103px;
+  left: 618px;
+  position: absolute;
+  z-index: 100;
+  background-color: white;
+  width: 300px;
+  height: 160px;
+  padding: 20px;
+  border: 2px solid;
+  border-radius: 10px;
 }
